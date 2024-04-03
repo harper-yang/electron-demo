@@ -2,14 +2,17 @@
   "name": "electron-demo",
   "private": true,
   "version": "0.0.0",
-  "main": "main",
+  "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "./node_modules/.bin/electron .",
+    "start": "electron .",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build-render": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start-electron": "electron .",
+    "build-electron": "electron-builder build -m",
+    "build": "npm install && npm run build-render && npm run build-electron"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -22,10 +25,35 @@
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react": "^4.2.1",
     "electron": "^29.1.6",
+    "electron-builder": "^24.13.3",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
+  },
+  "build": {
+    "productName": "electron-demo",
+    "files": [
+      "dist/",
+      "main.js"
+    ],
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "directories": {
+      "output": "release"
+    }
   }
 }
